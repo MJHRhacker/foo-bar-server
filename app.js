@@ -10,11 +10,11 @@ const MongoStore = require('connect-mongo')(session);
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
-const fooRouter = require('./routes/foo');
+const icecreamRouter = require('./routes/icecream');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/foodb', {
+mongoose.connect('mongodb://localhost/icecreamdb', {
   keepAlive: true,
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE
@@ -48,7 +48,7 @@ app.use(cors({
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-app.use('/foo', fooRouter);
+app.use('/icecream', icecreamRouter);
 
 // -- errors
 

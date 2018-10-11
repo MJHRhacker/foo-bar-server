@@ -4,10 +4,10 @@ const express = require('express');
 const router = express.Router();
 const ObjectId = require('mongoose').Types.ObjectId;
 
-const Foo = require('../models/foo');
+const Icecream = require('../models/icecream');
 
 router.get('/', (req, res, next) => {
-  Foo.find({})
+  Icecream.find({})
     .then((results) => {
       res.json(results);
     })
@@ -15,14 +15,14 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const { bar, baz } = req.body;
-  if (!bar || !baz) {
+  const { flavour, topping } = req.body;
+  if (!flavour || !topping) {
     return res.status(422).json({ code: 'unprosessable-entity' });
   }
-  const foo = new Foo(req.body);
-  foo.save()
+  const icecream = new Icecream(req.body);
+  icecream.save()
     .then(() => {
-      res.status(200).json(foo);
+      res.status(200).json(icecream);
     })
     .catch(next);
 });
@@ -32,9 +32,9 @@ router.delete('/:id', (req, res, next) => {
   if (!id || !ObjectId.isValid(id)) {
     res.status(404).json({ code: 'not-found' });
   }
-  Foo.remove({ _id: id })
+  Icecream.remove({ _id: id })
     .then(() => {
-      res.json({ code: 'foo deleted' });
+      res.json({ code: 'icecream deleted' });
     })
     .catch(next);
 });
